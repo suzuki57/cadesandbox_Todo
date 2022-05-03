@@ -1,27 +1,15 @@
-import "./styles.css";
-
 const onClickAdd = () => {
   // テキストボックスの値を取得し、初期化する
   const inputText = document.getElementById("add-text").value;
   document.getElementById("add-text").value = "";
 
-  createIncompletevList(inputText);
-};
-
-// 未完了リストから指定の要素を削除
-const deleteFromIncompleteList = (target) => {
-  document.getElementById("incomplete-list").removeChild(target);
-};
-
-// 未完了リストに追加する関数
-const createIncompletevList = (text) => {
   // div生成
   const div = document.createElement("div");
   div.className = "list-row";
 
   // liタグを生成
   const li = document.createElement("li");
-  li.innerText = text;
+  li.innerText = inputText;
 
   // button(完了)タグ生成
   const completeButton = document.createElement("button");
@@ -46,15 +34,6 @@ const createIncompletevList = (text) => {
     // button(戻す)タグ生成
     const backButton = document.createElement("button");
     backButton.innerText = "戻す";
-    backButton.addEventListener("click", () => {
-      // 押された戻すボタンの親タグ（div）を完了リストから削除
-      const deleteTarget = backButton.parentNode;
-      document.getElementById("complete-list").removeChild(deleteTarget);
-
-      // テキスト取得
-      const text = backButton.parentNode.firstElementChild.innerText;
-      createIncompletevList(text);
-    });
 
     // divタグの子要素に各要素を設定
     addTarget.appendChild(li);
@@ -79,6 +58,11 @@ const createIncompletevList = (text) => {
 
   // 未完了のリストに追加
   document.getElementById("incomplete-list").appendChild(div);
+};
+
+// 未完了リストから指定の要素を削除
+const deleteFromIncompleteList = (target) => {
+  document.getElementById("incomplete-list").removeChild(target);
 };
 
 document
